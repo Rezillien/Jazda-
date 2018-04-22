@@ -88,14 +88,14 @@ public class Car2DController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        this.speedForce = 0;
-        this.torqueForce = 0;
+        //this.speedForce = 0;
+        //this.torqueForce = 0;
     }
 
     private float getDistance()
     {
         RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, new Vector2(0f,0f));
-
+        
         //If something was hit.
         if (hit.collider != null)
         {

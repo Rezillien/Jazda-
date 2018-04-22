@@ -50,7 +50,7 @@ public class AddRoad : MonoBehaviour
 
             transform.Translate(middle);
             transform.RotateAround(middle, Vector3.forward, angle);
-            transform.localScale += new Vector3(length / 2, 0, 0);
+            transform.localScale += new Vector3(length, 0, 0);
         }
     }
 
