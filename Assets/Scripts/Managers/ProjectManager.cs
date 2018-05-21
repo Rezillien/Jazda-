@@ -1,40 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public class ProjectManager : MonoBehaviour
 {
 
-    private ProjectManager _instance = null;
-    private readonly SignalLightsManager _signalLightsManager;
+    private static ProjectManager _instance = null;
 
     private ProjectManager()
     {
-        _signalLightsManager = new SignalLightsManager();
+        
     }
 
-    public ProjectManager GetManager()
+    public static ProjectManager GetManager()
     {
-        if (this._instance == null)
+        if (ProjectManager._instance == null)
         {
-            this._instance = new ProjectManager();
+            ProjectManager._instance = new ProjectManager();
         }
 
-        return this._instance;
+        return ProjectManager._instance;
     }
 
     public SignalLightsManager GetSignalLightsManager()
     {
-        return this._signalLightsManager;
+        return null;
     }
 
 	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    void Start()
+    {
+
+    }
+
+    private bool addStreetFlag = true;
 	// Update is called once per frame
-	void Update () {
-		
-	}
+    void Update()
+    {
+//        if (addStreetFlag && Input.GetButtonDown("AddStreetLane"))
+//        {
+//            addStreetFlag = false;
+
+//        }
+    }
+
+    
 }

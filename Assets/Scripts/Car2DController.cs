@@ -39,7 +39,7 @@ public class Car2DController : MonoBehaviour
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
-        Debug.Log(RightVelocity().magnitude);
+
 
         float driftFactor = driftFactorSticky;
         if (RightVelocity().magnitude > maxStickyVelocity)

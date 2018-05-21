@@ -26,6 +26,9 @@ public class AddRoad : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             start_position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            print(Input.mousePosition.x);
+            print(Input.mousePosition.y);
+            print(Input.mousePosition.z);
             start_position.z = 0;
         }
 
