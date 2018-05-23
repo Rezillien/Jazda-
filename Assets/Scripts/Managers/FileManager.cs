@@ -106,20 +106,28 @@ public class FileManager : MonoBehaviour {
         Vector3 end = new Vector3();
         foreach (var street in root.streets)
         {
-            start.x = Camera.main.pixelWidth * root.crossRoads[street.crossRoadFrom].x/100f;
-            start.y = Camera.main.pixelHeight * root.crossRoads[street.crossRoadFrom].y/100f;
+            start.x = //Camera.main.pixelWidth * 
+                      root.crossRoads[street.crossRoadFrom].x*1f-40f;
+            start.y = //Camera.main.pixelHeight * 
+                      root.crossRoads[street.crossRoadFrom].y*1f-50f;
             start.z = 0f;
-            end.x = Camera.main.pixelWidth * root.crossRoads[street.crossRoadTo].x/100f;
-            end.y = Camera.main.pixelHeight * root.crossRoads[street.crossRoadTo].y/100f;
+            end.x = //Camera.main.pixelWidth * 
+                    root.crossRoads[street.crossRoadTo].x*1f-40f;
+            end.y = //Camera.main.pixelHeight * 
+                    root.crossRoads[street.crossRoadTo].y*1f-50f;
             end.z = 0f;
-            start = Camera.main.ScreenToWorldPoint(start);
-            end = Camera.main.ScreenToWorldPoint(end);
+//            start = Camera.main.ScreenToWorldPoint(start);
+//            end = Camera.main.ScreenToWorldPoint(end);
+//            print(start.x);
+//            print(start.y);
+//            print(start.z);
             start.z = 0;
             end.z = 0;
             polygons[street.crossRoadFrom].Add(Camera.main.ScreenToWorldPoint(start)+end-start);
             polygons[street.crossRoadTo].Add(Camera.main.ScreenToWorldPoint(end)+start-end);
             createStreet(start,end,street.lanes.Count);
         }
+
 
         foreach (var polygon in polygons)
         {
@@ -149,13 +157,19 @@ public class FileManager : MonoBehaviour {
     public GameObject lane2;
     public GameObject lane3;
 
+    public GameObject leftCollider;
+    public GameObject RightCollider;
+    public GameObject Blocked;
+    public GameObject BothCollider;
+
+    public GameObject genericCrossRoad;
 
 
     public void createStreet(Vector3 start, Vector3 end, int lanes) {
         GameObject prefab;
 
-        start.z = 0;
-        end.z = 0;
+        start.z = 1;
+        end.z = 1;
 
         start.x += 1.5f * Camera.main.orthographicSize;
         start.y += 1.5f * Camera.main.orthographicSize;
@@ -171,6 +185,11 @@ public class FileManager : MonoBehaviour {
 
         }
 
+        GameObject crs = genericCrossRoad;
+
+        
+
+
         GameObject obj = Instantiate(prefab) as GameObject;
 
 
@@ -182,11 +201,26 @@ public class FileManager : MonoBehaviour {
             end - start,
             Vector3.forward
         );
-        float length = Vector3.Distance(start, end);
+        float length = Vector3.Distance(start, end)-5f;
+        print(length);
 
         transform.Translate(middle);
+        
         transform.RotateAround(middle, Vector3.forward, angle);
         transform.localScale += new Vector3(length, 0, 0);
+
+        GameObject crossroad = Instantiate(crs) as GameObject;
+        Transform crossroadTransform = crossroad.GetComponent<Transform>();
+        crossroadTransform.SetPositionAndRotation(end, new Quaternion(0, 0, 0, 0));
+
+        //        crossroadTransform.RotateAround(middle, Vector3.forward, angle);
+        GameObject crossroad2 = Instantiate(genericCrossRoad) as GameObject;
+        Transform crossroadTransform2 = crossroad2.GetComponent<Transform>();
+        crossroadTransform2.SetPositionAndRotation(end,new Quaternion(0,0,0,0));
+
+//        crossroadTransform.RotateAround(start, Vector3.forward, angle);
+//        crossroadTransform2.RotateAround(end, Vector3.forward, angle);
+
     }
 
 }
