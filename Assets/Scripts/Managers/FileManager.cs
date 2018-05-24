@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using Assets.Scripts.FileObjects;
@@ -125,7 +126,7 @@ public class FileManager : MonoBehaviour {
             end.z = 0;
             polygons[street.crossRoadFrom].Add(Camera.main.ScreenToWorldPoint(start)+end-start);
             polygons[street.crossRoadTo].Add(Camera.main.ScreenToWorldPoint(end)+start-end);
-            createStreet(start,end,street.lanes.Count);
+            createStreet(start,end,street.lanes);
         }
 
 
@@ -165,7 +166,7 @@ public class FileManager : MonoBehaviour {
     public GameObject genericCrossRoad;
 
 
-    public void createStreet(Vector3 start, Vector3 end, int lanes) {
+    public void createStreet(Vector3 start, Vector3 end, List<Lane> lanes) {
         GameObject prefab;
 
         start.z = 1;
@@ -177,11 +178,83 @@ public class FileManager : MonoBehaviour {
         end.x += 1.5f * Camera.main.orthographicSize;
         end.y += 1.5f * Camera.main.orthographicSize;
 
-        if (lanes == 2)
-            prefab = lane2;
+        if (lanes.Count%2==0)
+            foreach (var lane in lanes)
+            {
+                if (lane.way == -1 || lane.way == 1)
+                {
+                    prefab = BothCollider;
+                }
+                else
+                {
+                    prefab = Blocked;
+                }
+                GameObject obj = Instantiate(prefab) as GameObject;
+
+
+                Transform transform = obj.GetComponent<Transform>();
+
+                Vector3 middle = (start + end) / 2;
+                float angle = Vector3.SignedAngle(
+                    Vector3.right,
+                    end - start,
+                    Vector3.forward
+                );
+                float offset = lanes.IndexOf(lane) - lanes.Count / 2 + 0.5f;
+                Vector3 off = start - middle;
+                float len = Vector3.Distance(new Vector3(0, 0, 0), off);
+                off.x /= len;
+                off.y /= len;
+                off.z /= len;
+
+                off*= angle;
+
+
+//                middle += off;
+
+                middle.x+=Convert.ToSingle(Math.Cos(Convert.ToDouble(angle+90)*Math.PI/180f))*offset; //TODO
+                middle.y+=Convert.ToSingle(Math.Sin(Convert.ToDouble(angle+90) * Math.PI / 180f))*offset;
+               
+                float length = Vector3.Distance(start, end) - 8f;
+                print(length);
+                
+                transform.SetPositionAndRotation(middle,new Quaternion(0,0, 0, 0));
+//                transform.Translate(middle);
+                print(angle);
+                transform.RotateAround(middle, Vector3.forward, angle);
+                transform.localScale += new Vector3(length, 0, 0);
+            }
         else
         {
-            prefab = lane3;
+            foreach (var lane in lanes) {
+                if (lane.way == -1 || lane.way == 1) {
+                    prefab = BothCollider;
+                }
+                else {
+                    prefab = Blocked;
+                }
+                GameObject obj = Instantiate(prefab) as GameObject;
+
+
+                Transform transform = obj.GetComponent<Transform>();
+
+                Vector3 middle = (start + end) / 2;
+                float angle = Vector3.SignedAngle(
+                    Vector3.right,
+                    end - start,
+                    Vector3.forward
+                );
+                float offset = lanes.IndexOf(lane) - lanes.Count / 2 + 0.5f;
+                middle.x += Convert.ToSingle(Math.Cos(Convert.ToDouble(angle+90) * Math.PI / 180f)) * offset;
+                middle.y += (Convert.ToSingle(Math.Sin(Convert.ToDouble(angle+90) * Math.PI / 180f))) * offset;
+                float length = Vector3.Distance(start, end) - 10f;
+                print(length);
+
+                transform.SetPositionAndRotation(middle, new Quaternion(0, 0, 0, 0));
+                print(angle);
+                transform.RotateAround(middle, Vector3.forward, angle);
+                transform.localScale += new Vector3(length, 0, 0);
+            }
 
         }
 
@@ -190,33 +263,18 @@ public class FileManager : MonoBehaviour {
         
 
 
-        GameObject obj = Instantiate(prefab) as GameObject;
-
-
-        Transform transform = obj.GetComponent<Transform>();
-
-        Vector3 middle = (start + end) / 2;
-        float angle = Vector3.SignedAngle(
-            Vector3.right,
-            end - start,
-            Vector3.forward
-        );
-        float length = Vector3.Distance(start, end)-5f;
-        print(length);
-
-        transform.Translate(middle);
         
-        transform.RotateAround(middle, Vector3.forward, angle);
-        transform.localScale += new Vector3(length, 0, 0);
 
         GameObject crossroad = Instantiate(crs) as GameObject;
         Transform crossroadTransform = crossroad.GetComponent<Transform>();
         crossroadTransform.SetPositionAndRotation(end, new Quaternion(0, 0, 0, 0));
 
         //        crossroadTransform.RotateAround(middle, Vector3.forward, angle);
-        GameObject crossroad2 = Instantiate(genericCrossRoad) as GameObject;
+        GameObject crossroad2 = Instantiate(crs) as GameObject;
         Transform crossroadTransform2 = crossroad2.GetComponent<Transform>();
         crossroadTransform2.SetPositionAndRotation(end,new Quaternion(0,0,0,0));
+
+        crossroadTransform2.localScale += new Vector3(4f,4f,0);
 
 //        crossroadTransform.RotateAround(start, Vector3.forward, angle);
 //        crossroadTransform2.RotateAround(end, Vector3.forward, angle);
