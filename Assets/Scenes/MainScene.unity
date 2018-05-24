@@ -217,7 +217,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 35
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -286,6 +286,36 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: genericCrossRoad
+      value: 
+      objectReference: {fileID: 1827160374548258, guid: 8a6b48bb9ae8e0f40b78ff4f131247d4,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: Blocked
+      value: 
+      objectReference: {fileID: 1964519995625592, guid: 8d005408cfc8ae640bebd67e5087ebef,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: BothCollider
+      value: 
+      objectReference: {fileID: 1498596501461792, guid: cf215471095e3894cb0248a14d810914,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: leftCollider
+      value: 
+      objectReference: {fileID: 1353329890476026, guid: ba6d3f4bff4fcae418db7c5e2647c1b5,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: RightCollider
+      value: 
+      objectReference: {fileID: 1164013727431144, guid: bea4c43dacc24e74684868500b19e78d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb4553a520af2f14197dd776ef0ae34e, type: 2}
   m_IsPrefabParent: 0
