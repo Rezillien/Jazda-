@@ -16,10 +16,10 @@ public class Minimap : MonoBehaviour {
 		float h = bounds.height/Screen.height;
 		float x = bounds.x/Screen.width;
 		float y = (Screen.height-(bounds.y+bounds.height))/Screen.height;
-		camera.rect = new Rect(x, y, w, h);
+//		camera.rect = new Rect(x, y, w, h);
 		if (Input.GetMouseButtonDown(0)) {
 			RaycastHit hit;
-			if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity)) if (hit.transform.gameObject.tag != "Obstacle") target.transform.position = hit.point;
+//			if (Physics.Raycast(camera.ScreenPointToRay(Input.mousePosition), out hit, float.PositiveInfinity)) if (hit.transform.gameObject.tag != "Obstacle") target.transform.position = hit.point;
 		}
 	}
 

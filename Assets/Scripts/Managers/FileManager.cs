@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using Assets.Scripts.FileObjects;
 using Newtonsoft.Json;
+using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class FileManager : MonoBehaviour {
 
@@ -14,6 +16,11 @@ public class FileManager : MonoBehaviour {
     }
 
     private List<List<Vector3>> polygons = new List<List<Vector3>>();
+
+
+    public GameObject CrossRoadType;
+    public GameObject LineType;
+    public GameObject GreenPathType;
 
     private bool outputFlag = true;
     private bool inputFlag = true;
@@ -29,6 +36,16 @@ public class FileManager : MonoBehaviour {
         {
             var root = new Root();
             var crossRoads = new List<CrossRoad>();
+            var streets = new List<Street>();
+
+            var cnt = 0;
+
+            foreach (var crossRoad in Resources.FindObjectsOfTypeAll(CrossRoadType.GetType()))
+            {
+                
+                
+            }
+
             crossRoads.Add(new CrossRoad { id = 0, x = -15.0f, y = -15.0f });
             crossRoads.Add(new CrossRoad { id = 1, x = 0.0f, y = 15.0f });
             crossRoads.Add(new CrossRoad { id = 2, x = 15.0f, y = -15.0f });
@@ -38,7 +55,7 @@ public class FileManager : MonoBehaviour {
             crossRoads.Add(new CrossRoad { id = 6, x = 0.0f, y = 45.0f });
 
 
-            var streets = new List<Street>();
+            
             asd += 1.0f;
             streets.Add(new Street{crossRoadFrom = 0, crossRoadTo = 1,lanes = new List<Lane>()});
             streets.Add(new Street { crossRoadFrom = 1, crossRoadTo = 2, lanes = new List<Lane>() });
@@ -193,7 +210,7 @@ public class FileManager : MonoBehaviour {
 
 
                 Transform transform = obj.GetComponent<Transform>();
-
+         
                 Vector3 middle = (start + end) / 2;
                 float angle = Vector3.SignedAngle(
                     Vector3.right,
@@ -388,4 +405,22 @@ public class Triangulator {
 
         return ((aCROSSbp >= 0.0f) && (bCROSScp >= 0.0f) && (cCROSSap >= 0.0f));
     }
+
+
+    List<GameObject> GetAllObjectsInScene() {
+        List<GameObject> objectsInScene = new List<GameObject>();
+
+        foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[]) {
+            if (go.hideFlags == HideFlags.NotEditable || go.hideFlags == HideFlags.HideAndDontSave)
+                continue;
+
+            if (!EditorUtility.IsPersistent(go.transform.root.gameObject))
+                continue;
+
+            objectsInScene.Add(go);
+        }
+
+        return objectsInScene;
+    }
+
 }
