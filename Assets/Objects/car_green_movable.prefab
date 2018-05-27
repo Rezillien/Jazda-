@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114562183715399036}
   - component: {fileID: 50881707606155128}
   - component: {fileID: 61794541550741978}
+  - component: {fileID: 114028007480674764}
   m_Layer: 0
   m_Name: car_green_movable
   m_TagString: Untagged
@@ -88,13 +89,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.16}
   m_EdgeRadius: 0
---- !u!114 &114562183715399036
+--- !u!114 &114028007480674764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061963026420064}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cea173fc6865eb4999f3b5cfe402a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114562183715399036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061963026420064}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43460555209786f469d024769dcfb4b6, type: 3}
   m_Name: 
