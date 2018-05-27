@@ -296,7 +296,7 @@ Prefab:
         type: 2}
       propertyPath: Blocked
       value: 
-      objectReference: {fileID: 1964519995625592, guid: 8d005408cfc8ae640bebd67e5087ebef,
+      objectReference: {fileID: 1196291842821454, guid: 8e6e036efb79dfb4fbb69e692af85cfb,
         type: 2}
     - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
         type: 2}
@@ -315,6 +315,24 @@ Prefab:
       propertyPath: RightCollider
       value: 
       objectReference: {fileID: 1164013727431144, guid: bea4c43dacc24e74684868500b19e78d,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: CrossRoadType
+      value: 
+      objectReference: {fileID: 1827160374548258, guid: 8a6b48bb9ae8e0f40b78ff4f131247d4,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: GreenPathType
+      value: 
+      objectReference: {fileID: 1196291842821454, guid: 8e6e036efb79dfb4fbb69e692af85cfb,
+        type: 2}
+    - target: {fileID: 114235435759134468, guid: fb4553a520af2f14197dd776ef0ae34e,
+        type: 2}
+      propertyPath: LineType
+      value: 
+      objectReference: {fileID: 1498596501461792, guid: cf215471095e3894cb0248a14d810914,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb4553a520af2f14197dd776ef0ae34e, type: 2}
