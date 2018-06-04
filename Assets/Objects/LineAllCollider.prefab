@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61660400201594088}
   m_Layer: 0
   m_Name: LineAllCollider
-  m_TagString: Untagged
+  m_TagString: line
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -17,13 +17,13 @@
     },
     {
       "id": 3,
-      "x": 45.0,
+      "x": 30.0,
       "y": -15.0
     },
     {
       "id": 4,
       "x": 15.0,
-      "y": -45.0
+      "y": -30.0
     },
     {
       "id": 5,
@@ -42,9 +42,6 @@
       "crossRoadTo": 1,
       "lanes": [
         {
-          "way": 0
-        },
-	{
           "way": 1
         },
         {
@@ -52,9 +49,6 @@
         },
         {
           "way": -1
-        },
-	{
-          "way": 0
         }
       ]
     },
@@ -62,17 +56,11 @@
       "crossRoadFrom": 1,
       "crossRoadTo": 2,
       "lanes": [
-	{
-          "way": 0
-        },
         {
           "way": 1
         },
         {
           "way": -1
-        },
-	{
-          "way": 0
         }
       ]
     },
@@ -80,32 +68,23 @@
       "crossRoadFrom": 2,
       "crossRoadTo": 0,
       "lanes": [
-	{
-          "way": 0
-        },
         {
           "way": 1
         },
         {
           "way": -1
-        },
-	{
-          "way": 0
-        },
+        }
       ]
     },
     {
       "crossRoadFrom": 2,
       "crossRoadTo": 3,
       "lanes": [
-	{
-          "way": 0
-        },        
-	{
+        {
           "way": 1
         },
         {
-          "way": 0
+          "way": 1
         }
       ]
     },
@@ -113,14 +92,11 @@
       "crossRoadFrom": 2,
       "crossRoadTo": 4,
       "lanes": [
-	{
-          "way": 0
-        },
         {
           "way": 1
         },
         {
-          "way": 0
+          "way": 1
         }
       ]
     },
@@ -128,14 +104,11 @@
       "crossRoadFrom": 0,
       "crossRoadTo": 5,
       "lanes": [
-	{
-          "way": 0
-        },
         {
           "way": 1
         },
         {
-          "way": 0
+          "way": 1
         }
       ]
     },
@@ -143,17 +116,11 @@
       "crossRoadFrom": 1,
       "crossRoadTo": 6,
       "lanes": [
-	{
-          "way": 0
-        },
         {
           "way": 1
         },
         {
-          "way": -1
-        },
-	{
-          "way": 0
+          "way": 1
         }
       ]
     }

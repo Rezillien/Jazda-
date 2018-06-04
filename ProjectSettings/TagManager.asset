@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Undefined
   - road
+  - line
+  - crossroad
+  - greenpath
+  - lane
   layers:
   - Default
   - TransparentFX
