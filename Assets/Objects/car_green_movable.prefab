@@ -100,7 +100,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cea173fc6865eb4999f3b5cfe402a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedMultiply: 0
+  speedForce: 20
+  brakeForce: 60
+  speedlimit: 5
+  carefullness: 0.5
+  auto_drive: 1
+  creator_name: 
 --- !u!114 &114562183715399036
 MonoBehaviour:
   m_ObjectHideFlags: 1

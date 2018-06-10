@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class CarCreator : MonoBehaviour {
+    public string name;
 
 	// Use this for initialization
 	void Start ()
 	{
-	    StartCoroutine(CreateCars());
+        StreamWriter sr = File.CreateText("Assets/Statistics/" + name);
+        sr.Close();
+        StartCoroutine(CreateCars());
 	}
 
     public float x;
@@ -28,6 +32,9 @@ public class CarCreator : MonoBehaviour {
             GameObject prefab = this.car;
 
             GameObject obj = Instantiate(prefab) as GameObject;
+            var car = obj.GetComponent<Autopilot>();
+            car.creation_time = System.DateTime.Now;
+            car.creator_name = name;
 
 
             Transform transform = obj.GetComponent<Transform>();

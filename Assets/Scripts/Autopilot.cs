@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Autopilot : MonoBehaviour
 {
-    float speedForce = 15f;
+    public float speedForce = 15f;
+    public float brakeForce = 30f;
     float torqueForce = -200f;
-    float speedlimit = 10f;
+    public float speedlimit = 10f;
+    public float carefullness = 1.0f;
+    public int auto_drive = 1;
     Rigidbody2D rb;
-    public float SpeedMultiply;
+    public System.DateTime creation_time;
+    public string creator_name;
 
     // Use this for initialization
     void Start()
@@ -31,34 +35,35 @@ public class Autopilot : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(rb.position + direction, direction);
 
         //If something was hit.
-        if (hit.collider != null && hit.distance <= 2.0f)
+        if (hit.collider != null && hit.distance <= rb.velocity.magnitude * carefullness + 0.5f)
         {
-            //If the object hit is less than or equal to 6 units away from this object.
-
+            //If the object hit is less than or equal to n units away from this object.
             // brake
             if (Vector2.Dot(direction, rb.velocity) > 0)
-                rb.AddForce(transform.up * -speedForce * 1.8f);
+                rb.AddForce(transform.up * -brakeForce);
             else
                 rb.velocity = new Vector2(0, 0);
         }
         else
         {
             if (rb.velocity.magnitude < speedlimit)
-                rb.AddForce(transform.up * speedForce * SpeedMultiply);
+                rb.AddForce(transform.up * speedForce * auto_drive);
         }
 
 
         if (Input.GetButton("Accelerate"))
         {
-            rb.AddForce(transform.up * speedForce);
-
+            if (rb.velocity.magnitude < speedlimit)
+            {
+                rb.AddForce(transform.up * speedForce);
+            }
             // Consider using rb.AddForceAtPosition to apply force twice, at the position
             // of the rear tires/tyres
         }
 
         if (Input.GetButton("Brakes"))
         {
-            rb.AddForce(transform.up * -speedForce / 2f);
+            rb.AddForce(transform.up * -brakeForce);
 
             // Consider using rb.AddForceAtPosition to apply force twice, at the position
             // of the rear tires/tyres
