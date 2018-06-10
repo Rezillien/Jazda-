@@ -8,6 +8,7 @@ public class Autopilot : MonoBehaviour
     float torqueForce = -200f;
     float speedlimit = 10f;
     Rigidbody2D rb;
+    public float SpeedMultiply;
 
     // Use this for initialization
     void Start()
@@ -30,20 +31,20 @@ public class Autopilot : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(rb.position + direction, direction);
 
         //If something was hit.
-        if (hit.collider != null && hit.distance <= 4.0f)
+        if (hit.collider != null && hit.distance <= 2.0f)
         {
             //If the object hit is less than or equal to 6 units away from this object.
 
             // brake
             if (Vector2.Dot(direction, rb.velocity) > 0)
-                rb.AddForce(transform.up * -speedForce / 2f);
+                rb.AddForce(transform.up * -speedForce * 1.8f);
             else
                 rb.velocity = new Vector2(0, 0);
         }
         else
         {
             if (rb.velocity.magnitude < speedlimit)
-                rb.AddForce(transform.up * speedForce);
+                rb.AddForce(transform.up * speedForce * SpeedMultiply);
         }
 
 

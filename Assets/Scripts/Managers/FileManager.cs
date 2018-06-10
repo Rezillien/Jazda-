@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using CarCreator = Assets.Scripts.FileObjects.CarCreator;
 using Object = UnityEngine.Object;
 
 public class FileManager : MonoBehaviour
@@ -22,6 +23,9 @@ public class FileManager : MonoBehaviour
     public GameObject CrossRoadType;
     public GameObject LineType;
     public GameObject GreenPathType;
+    public GameObject car;
+    public GameObject carCreator;
+    public GameObject carDestroyer;
 
     private bool outputFlag = true;
     private bool inputFlag = true;
@@ -43,6 +47,7 @@ public class FileManager : MonoBehaviour
             var crossRoads = new List<CrossRoad>();
             var streets = new List<Street>();
             var linesTo = new List<LaneTo>();
+            
 
             var cnt = 0;
 
@@ -145,6 +150,73 @@ public class FileManager : MonoBehaviour
             transform.eulerAngles = angle;
             transform.localScale = scale;
         }
+        if (root.cars != null)
+            foreach (var jsoncar in root.cars)
+            {
+                GameObject prefab = this.car;
+
+                GameObject obj = Instantiate(prefab) as GameObject;
+
+
+                Transform transform = obj.GetComponent<Transform>();
+
+                Vector3 position = new Vector3 { x = jsoncar.x, y = jsoncar.y };
+                Vector3 angle = new Vector3 { x = 0, y = 0, z = jsoncar.angle };
+//                Vector3 scale = new Vector3 { x = lane.scalex, y = lane.sc
+                transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
+                //            transform.RotateAround(middle, Vector3.forward, angle);
+                transform.eulerAngles = angle;
+            }
+
+        if (root.carCreators != null)
+        {
+            foreach (var creator in root.carCreators)
+            {
+                GameObject prefab = this.carCreator;
+
+                GameObject obj = Instantiate(prefab) as GameObject;
+
+                var carCreator = obj.GetComponent<global::CarCreator>();
+                carCreator.angle = creator.angle;
+                carCreator.x = creator.x;
+                carCreator.y = creator.y;
+                carCreator.interval = creator.interval;
+                carCreator.car = this.car;
+
+                Transform transform = obj.GetComponent<Transform>();
+
+                Vector3 position = new Vector3 { x = creator.x, y = creator.y };
+//                Vector3 angle = new Vector3 { x = 0, y = 0, z = destroyer.angle };
+//                Vector3 scale = new Vector3 { x = destroyer.scalex, y = destroyer.scaley };
+                transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
+                //            transform.RotateAround(middle, Vector3.forward, angle);
+//                transform.localScale = scale;
+//                transform.eulerAngles = angle;
+            }
+        }
+
+        if (root.carDestroyers != null)
+        {
+            foreach (var destroyer in root.carDestroyers)
+            {
+                GameObject prefab = this.carDestroyer;
+
+                GameObject obj = Instantiate(prefab) as GameObject;
+
+
+                Transform transform = obj.GetComponent<Transform>();
+
+                Vector3 position = new Vector3 { x = destroyer.x, y = destroyer.y };
+                Vector3 angle = new Vector3 { x = 0, y = 0, z = destroyer.angle };
+                Vector3 scale = new Vector3 {x = destroyer.scalex, y = destroyer.scaley};
+                transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
+                //            transform.RotateAround(middle, Vector3.forward, angle);
+                transform.localScale = scale;
+                transform.eulerAngles = angle;
+                
+            }
+        }
+
 
         Vector3 start = new Vector3();
         Vector3 end = new Vector3();
@@ -185,7 +257,8 @@ public class FileManager : MonoBehaviour
             Transform crossroadTransform2 = crossroad2.GetComponent<Transform>();
             crossroadTransform2.SetPositionAndRotation(new Vector3{x=cross.x,y=cross.y}, new Quaternion(0, 0, 0, 0));
 
-            crossroadTransform2.localScale += new Vector3(4f, 4f, 0);
+            if(root.lanes==null)
+                crossroadTransform2.localScale += new Vector3(4f, 4f, 0);
         }
 
 

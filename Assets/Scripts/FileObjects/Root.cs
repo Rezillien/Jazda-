@@ -8,6 +8,9 @@ namespace Assets.Scripts.FileObjects
         public List<CrossRoad> crossRoads { get; set; }
         public List<Street> streets { get; set; }
         public List<LaneTo> lanes { get; set; }
+        public List<Car> cars { get; set; }
+        public List<CarCreator> carCreators { get; set; }
+        public List<CarDestroyer> carDestroyers { get; set; }
     }
     public class CrossRoad {
         public int id { get; set; }
@@ -43,5 +46,29 @@ namespace Assets.Scripts.FileObjects
         public float scalex { get; set; }
         public float scaley { get; set; }
 
+    }
+
+    public class Car
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+        public float angle { get; set; }
+    }
+
+    public class CarCreator
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+        public float angle { get; set; }
+        public float interval { get; set; }
+    }
+
+    public class CarDestroyer
+    {
+        public float x { get; set; }
+        public float y { get; set; }
+        public float angle { get; set; }
+        public float scalex { get; set; }
+        public float scaley { get; set; }
     }
 }

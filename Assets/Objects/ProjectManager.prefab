@@ -109,8 +109,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b93532f3ac05a419f8539026e7db80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CrossRoadType: {fileID: 1827160374548258, guid: 8a6b48bb9ae8e0f40b78ff4f131247d4,
+    type: 2}
+  LineType: {fileID: 1498596501461792, guid: cf215471095e3894cb0248a14d810914, type: 2}
+  GreenPathType: {fileID: 1196291842821454, guid: 8e6e036efb79dfb4fbb69e692af85cfb,
+    type: 2}
+  car: {fileID: 1061963026420064, guid: a19f6c736c557fb48a45631fb8d93f06, type: 2}
+  carCreator: {fileID: 1629906285105680, guid: 02fc2143b9e83e449a914abf0c3d265b, type: 2}
+  carDestroyer: {fileID: 1428037228047782, guid: 0832fcdd1f830ca4d8170eb83fbf7caf,
+    type: 2}
+  file: file.json
   lane2: {fileID: 1707037483416994, guid: f1089a61616bb9d41a6d274da990f14d, type: 2}
   lane3: {fileID: 1707037483416994, guid: f1089a61616bb9d41a6d274da990f14d, type: 2}
+  leftCollider: {fileID: 1353329890476026, guid: ba6d3f4bff4fcae418db7c5e2647c1b5,
+    type: 2}
+  RightCollider: {fileID: 1164013727431144, guid: bea4c43dacc24e74684868500b19e78d,
+    type: 2}
+  Blocked: {fileID: 1196291842821454, guid: 8e6e036efb79dfb4fbb69e692af85cfb, type: 2}
+  BothCollider: {fileID: 1498596501461792, guid: cf215471095e3894cb0248a14d810914,
+    type: 2}
+  genericCrossRoad: {fileID: 1827160374548258, guid: 8a6b48bb9ae8e0f40b78ff4f131247d4,
+    type: 2}
 --- !u!114 &114891904781596642
 MonoBehaviour:
   m_ObjectHideFlags: 1

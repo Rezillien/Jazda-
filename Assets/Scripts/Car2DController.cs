@@ -7,12 +7,14 @@ public class Car2DController : MonoBehaviour
 
     public bool isControllable = true;
 
-    float speedForce = 15f;
+    float speedForce = 300f;
     float torqueForce = -200f;
     float driftFactorSticky = 0.7f;
     float driftFactorSlippy = 0.1f;
     float maxStickyVelocity = 2.5f;
-    float minSlippyVelocity = 1.5f; 
+    float minSlippyVelocity = 1.5f;
+
+    private float breakes = 300f;
 
 
 
@@ -58,7 +60,7 @@ public class Car2DController : MonoBehaviour
         }
         if (Input.GetButton("Brakes"))
         {
-            rb.AddForce(transform.up * -speedForce / 2f);
+            rb.AddForce(transform.up * -speedForce * 3);
 
             // Consider using rb.AddForceAtPosition to apply force twice, at the position
             // of the rear tires/tyres

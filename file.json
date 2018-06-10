@@ -42,10 +42,13 @@
       "crossRoadTo": 1,
       "lanes": [
         {
+          "way": 0
+        },
+	{
           "way": 1
         },
         {
-          "way": 0
+          "way": 1
         },
         {
           "way": -1
@@ -61,6 +64,9 @@
         },
         {
           "way": -1
+        },
+	{
+          "way": 0
         }
       ]
     },
@@ -123,6 +129,48 @@
           "way": 1
         }
       ]
+    }
+  ],
+  "cars": [
+    {
+      "x": -15,
+      "y": -15,
+      "angle": 10
+    },
+    {
+      "x": 15,
+      "y": -15,
+      "angle": 15
+    }
+  ],
+  "carCreators": [
+    {
+      "x": -15,
+      "y": -15,
+      "angle": 10,
+      "interval": 1.0
+    },
+    {
+      "x": 15,
+      "y": -15,
+      "angle": 15,
+      "interval": 1.5
+    }
+  ],
+  "carDestroyers": [
+    {
+      "x": 30.0,
+      "y": -15.0,
+      "angle": 0,
+      "scalex":1,
+      "scaley":1
+    },
+    {
+      "x": 30.0,
+      "y": -16.0,
+      "angle": 0,
+      "scalex":1,
+      "scaley":1
     }
   ]
 }
