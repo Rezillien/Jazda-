@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class Autopilot : MonoBehaviour
 {
-    public float speedForce = 15f;
-    public float brakeForce = 30f;
-    float torqueForce = -200f;
-    public float speedlimit = 10f;
-    public float carefullness = 1.0f;
-    public int auto_drive = 1;
-    Rigidbody2D rb;
+    public Car2DController controller = new SimpleCarController();
     public System.DateTime creation_time;
     public string creator_name;
+    
+    Rigidbody2D rb;
 
     // Use this for initialization
     void Start()
@@ -28,49 +24,15 @@ public class Autopilot : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 direction = new Vector2(Mathf.Cos((rb.rotation + 90) * Mathf.Deg2Rad),
-            Mathf.Sin((rb.rotation + 90) * Mathf.Deg2Rad));
-
-        // check whats ahead of you
-        RaycastHit2D hit = Physics2D.Raycast(rb.position + direction, direction);
-
-        //If something was hit.
-        if (hit.collider != null && hit.distance <= rb.velocity.magnitude * carefullness + 0.5f)
-        {
-            //If the object hit is less than or equal to n units away from this object.
-            // brake
-            if (Vector2.Dot(direction, rb.velocity) > 0)
-                rb.AddForce(transform.up * -brakeForce);
-            else
-                rb.velocity = new Vector2(0, 0);
-        }
-        else
-        {
-            if (rb.velocity.magnitude < speedlimit)
-                rb.AddForce(transform.up * speedForce * auto_drive);
-        }
-
+        controller.raycast(rb, transform);
 
         if (Input.GetButton("Accelerate"))
-        {
-            if (rb.velocity.magnitude < speedlimit)
-            {
-                rb.AddForce(transform.up * speedForce);
-            }
-            // Consider using rb.AddForceAtPosition to apply force twice, at the position
-            // of the rear tires/tyres
-        }
+			controller.accelerate(rb, transform);
 
         if (Input.GetButton("Brakes"))
-        {
-            rb.AddForce(transform.up * -brakeForce);
-
-            // Consider using rb.AddForceAtPosition to apply force twice, at the position
-            // of the rear tires/tyres
-        }
-
-        float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 2);
-        rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
+			controller.brake(rb, transform);
+			
+		controller.turn(rb, transform, Input.GetAxis("Horizontal"));
     }
 
     void OnCollisionEnter2D(Collision2D coll)

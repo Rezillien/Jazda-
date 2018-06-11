@@ -2,118 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Car2DController : MonoBehaviour
+public abstract class Car2DController
 {
+    public float speedForce = 15f;
+    public float brakeForce = 30f;
+    public float torqueForce = -300f;
+    public float speedlimit = 10f;
+    public float carefullness = 1.0f;
+    public int auto_drive = 0;
+    
+    public virtual void raycast(Rigidbody2D rb, Transform transform) {
+		float phi = (rb.rotation + 90) * Mathf.Deg2Rad;
+		Vector2 direction = new Vector2(Mathf.Cos(phi), Mathf.Sin(phi));
+            
+		RaycastHit2D hit = Physics2D.Raycast(rb.position + direction, direction);
 
-    public bool isControllable = true;
-
-    float speedForce = 300f;
-    float torqueForce = -200f;
-    float driftFactorSticky = 0.7f;
-    float driftFactorSlippy = 0.1f;
-    float maxStickyVelocity = 2.5f;
-    float minSlippyVelocity = 1.5f;
-
-    private float breakes = 300f;
-
-
-
-
-    // Use this for initialization
-    void Start()
-    {
-        if (isControllable == false)
+        //If something was hit.
+        if (hit.collider != null && hit.distance <= rb.velocity.magnitude * carefullness + 0.5f)
         {
-            this.speedForce = 0;
-            this.torqueForce = 0;
+            //If the object hit is less than or equal to n units away from this object.
+            // brake
+            if (Vector2.Dot(direction, rb.velocity) > 0)
+                rb.AddForce(transform.up * -brakeForce);
+            else
+                rb.velocity = new Vector2(0, 0);
         }
-    }
-
-    void Update()
-    {
-        // check for button up/down here, then set a bool that you will use in FixedUpdate
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
-
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-
-
-        float driftFactor = driftFactorSticky;
-        if (RightVelocity().magnitude > maxStickyVelocity)
+        else
         {
-            driftFactor = driftFactorSlippy;
+            if (rb.velocity.magnitude < speedlimit)
+                rb.AddForce(transform.up * speedForce * auto_drive);
         }
-
-        rb.velocity = ForwardVelocity() + RightVelocity() * driftFactor;
-
-        if (Input.GetButton("Accelerate"))
+	}
+	
+	public virtual void accelerate(Rigidbody2D rb, Transform transform) {
+		if (rb.velocity.magnitude < speedlimit)
         {
             rb.AddForce(transform.up * speedForce);
-
-            // Consider using rb.AddForceAtPosition to apply force twice, at the position
-            // of the rear tires/tyres
-        }
-        if (Input.GetButton("Brakes"))
+            
+			// Consider using rb.AddForceAtPosition to apply force twice, at the position
+			// of the rear tires/tyres
+		}
+    }
+    
+    public virtual void brake(Rigidbody2D rb, Transform transform) {
+		if (rb.velocity.magnitude < speedlimit)
         {
-            rb.AddForce(transform.up * -speedForce * 3);
-
-            // Consider using rb.AddForceAtPosition to apply force twice, at the position
-            // of the rear tires/tyres
-        }
-
-        // If you are using positional wheels in your physics, then you probably
-        // instead of adding angular momentum or torque, you'll instead want
-        // to add left/right Force at the position of the two front tire/types
-        // proportional to your current forward speed (you are converting some
-        // forward speed into sideway force)
-        float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / 2);
-        rb.angularVelocity = Input.GetAxis("Horizontal") * tf;
-
-
-
+            rb.AddForce(transform.up * -brakeForce);
+            
+			// Consider using rb.AddForceAtPosition to apply force twice, at the position
+			// of the rear tires/tyres
+		}
     }
-
-    Vector2 ForwardVelocity()
-    {
-        return transform.up * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.up);
-    }
-
-    Vector2 RightVelocity()
-    {
-        return transform.right * Vector2.Dot(GetComponent<Rigidbody2D>().velocity, transform.right);
-    }
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        //this.speedForce = 0;
-        //this.torqueForce = 0;
-    }
-
-    private float getDistance()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(this.gameObject.transform.position, new Vector2(0f,0f));
-        
-        //If something was hit.
-        if (hit.collider != null)
-        {
-            //If the object hit is less than or equal to 6 units away from this object.
-            if (hit.distance <= 6.0f)
-            {
-                Debug.Log("Enemy In Range!");
-            }
-        }
-
-        return 0f;
-    }
-
-    public void SetIsControllable(bool isControllable)
-    {
-        this.isControllable = isControllable;
-    }
-
+    
+    public virtual void turn(Rigidbody2D rb, Transform transform, float turnAxis) {
+		float turn = Mathf.Clamp(turnAxis, -.2f, .2f);
+		float direction = Mathf.Sign(rb.rotation * Vector2.SignedAngle(Vector2.up, rb.velocity));
+		rb.AddForce(transform.up * -direction * brakeForce * Mathf.Abs(turn));
+		
+		float tf = Mathf.Lerp(0, torqueForce, rb.velocity.magnitude / speedlimit);
+        rb.angularVelocity = turnAxis * tf;
+	}
 }
