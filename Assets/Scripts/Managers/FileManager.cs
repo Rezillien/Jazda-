@@ -177,6 +177,13 @@ public class FileManager : MonoBehaviour
                 GameObject obj = Instantiate(prefab) as GameObject;
 
                 var carCreator = obj.GetComponent<global::CarCreator>();
+                var points = new List<Vector2>();
+                foreach (var n in creator.points)
+                {
+                    points.Add(new Vector2(n.x,n.y));
+                }
+
+                carCreator.list = points;
                 carCreator.angle = creator.angle;
                 carCreator.x = creator.x;
                 carCreator.y = creator.y;

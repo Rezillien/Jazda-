@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 namespace Assets.Scripts.FileObjects
 {
@@ -61,6 +63,7 @@ namespace Assets.Scripts.FileObjects
         public float y { get; set; }
         public float angle { get; set; }
         public float interval { get; set; }
+        public List<Point> points { get; set; }
     }
 
     public class CarDestroyer
@@ -70,5 +73,11 @@ namespace Assets.Scripts.FileObjects
         public float angle { get; set; }
         public float scalex { get; set; }
         public float scaley { get; set; }
+    }
+
+    public class Point
+    {
+        public float x { get; set; }
+        public float y { get; set; }
     }
 }

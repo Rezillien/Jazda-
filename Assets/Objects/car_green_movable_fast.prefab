@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 61794541550741978}
   - component: {fileID: 114028007480674764}
   m_Layer: 0
-  m_Name: car_green_movable
+  m_Name: car_green_movable_fast
   m_TagString: car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,8 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedForce: 20
   brakeForce: 60
-  speedlimit: 4
-  carefullness: 0.5
+  speedlimit: 5
+  carefullness: 1
   auto_drive: 1
   creator_name: 
 --- !u!114 &114562183715399036

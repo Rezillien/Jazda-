@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Assets.Scripts.FileObjects;
 
 public class CarCreator : MonoBehaviour {
     public string name;
@@ -9,8 +10,8 @@ public class CarCreator : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-        StreamWriter sr = File.CreateText("Assets/Statistics/" + name);
-        sr.Close();
+        //StreamWriter sr = File.CreateText("Assets/Statistics/" + name);
+        //sr.Close();
         StartCoroutine(CreateCars());
 	}
 
@@ -25,16 +26,22 @@ public class CarCreator : MonoBehaviour {
 		
 	}
 
+    public List<Vector2> list;
+
     private IEnumerator CreateCars()
     {
         while (true)
         {
+
+            
+
             GameObject prefab = this.car;
 
             GameObject obj = Instantiate(prefab) as GameObject;
-            var car = obj.GetComponent<Autopilot>();
-            car.creation_time = System.DateTime.Now;
-            car.creator_name = name;
+            var car = obj.GetComponent<TrueAutoPilot>();
+//            car.creation_time = System.DateTime.Now;
+//            car.creator_name = name;
+            car.DirectionList = new List<Vector2>(list);
 
 
             Transform transform = obj.GetComponent<Transform>();
