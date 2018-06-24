@@ -94,7 +94,7 @@ public class Autopilot : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        //this.speedForce = 0;
+        this.speedForce = 0;
         //this.torqueForce = 0;
     }
 }

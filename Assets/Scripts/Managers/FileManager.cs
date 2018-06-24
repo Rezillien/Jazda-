@@ -41,6 +41,7 @@ public class FileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //save file
         if (outputFlag && Input.GetButtonDown(outputName))
         {
             var root = new Root();
@@ -140,13 +141,12 @@ public class FileManager : MonoBehaviour
             Vector3 angle = new Vector3 {x = lane.anglex, y = lane.angley, z = lane.anglez};
             Vector3 scale = new Vector3{x=lane.scalex,y=lane.scaley};
 
-//            float length = Vector3.Distance(start, end) - 8f;
-//            print(length);
+
 
             transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
-            //                transform.Translate(middle);
+
             print(angle);
-//            transform.RotateAround(middle, Vector3.forward, angle);
+
             transform.eulerAngles = angle;
             transform.localScale = scale;
         }
@@ -162,9 +162,9 @@ public class FileManager : MonoBehaviour
 
                 Vector3 position = new Vector3 { x = jsoncar.x, y = jsoncar.y };
                 Vector3 angle = new Vector3 { x = 0, y = 0, z = jsoncar.angle };
-//                Vector3 scale = new Vector3 { x = lane.scalex, y = lane.sc
+
                 transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
-                //            transform.RotateAround(middle, Vector3.forward, angle);
+
                 transform.eulerAngles = angle;
             }
 
@@ -193,12 +193,9 @@ public class FileManager : MonoBehaviour
                 Transform transform = obj.GetComponent<Transform>();
 
                 Vector3 position = new Vector3 { x = creator.x, y = creator.y };
-//                Vector3 angle = new Vector3 { x = 0, y = 0, z = destroyer.angle };
-//                Vector3 scale = new Vector3 { x = destroyer.scalex, y = destroyer.scaley };
+
                 transform.SetPositionAndRotation(position, new Quaternion(0, 0, 0, 0));
-                //            transform.RotateAround(middle, Vector3.forward, angle);
-//                transform.localScale = scale;
-//                transform.eulerAngles = angle;
+
             }
         }
 
@@ -239,11 +236,7 @@ public class FileManager : MonoBehaviour
             end.y = //Camera.main.pixelHeight * 
                 root.crossRoads[street.crossRoadTo].y * 1f - 52.5f;
             end.z = 0f;
-//            start = Camera.main.ScreenToWorldPoint(start);
-//            end = Camera.main.ScreenToWorldPoint(end);
-//            print(start.x);
-//            print(start.y);
-//            print(start.z);
+
             start.z = 0;
             end.z = 0;
             polygons[street.crossRoadFrom].Add(Camera.main.ScreenToWorldPoint(start) + end - start);
@@ -258,8 +251,6 @@ public class FileManager : MonoBehaviour
             GameObject crs = genericCrossRoad;
 
 
-            
-            //        crossroadTransform.RotateAround(middle, Vector3.forward, angle);
             GameObject crossroad2 = Instantiate(crs) as GameObject;
             Transform crossroadTransform2 = crossroad2.GetComponent<Transform>();
             crossroadTransform2.SetPositionAndRotation(new Vector3{x=cross.x,y=cross.y}, new Quaternion(0, 0, 0, 0));
@@ -349,8 +340,6 @@ public class FileManager : MonoBehaviour
                 off *= angle;
 
 
-//                middle += off;
-
                 middle.x += Convert.ToSingle(Math.Cos(Convert.ToDouble(angle + 90) * Math.PI / 180f)) * offset; //TODO
                 middle.y += Convert.ToSingle(Math.Sin(Convert.ToDouble(angle + 90) * Math.PI / 180f)) * offset;
 
@@ -358,7 +347,6 @@ public class FileManager : MonoBehaviour
                 print(length);
 
                 transform.SetPositionAndRotation(middle, new Quaternion(0, 0, 0, 0));
-//                transform.Translate(middle);
                 print(angle);
                 transform.RotateAround(middle, Vector3.forward, angle);
                 transform.localScale += new Vector3(length, 0, 0);
@@ -402,8 +390,7 @@ public class FileManager : MonoBehaviour
 
         
 
-//        crossroadTransform.RotateAround(start, Vector3.forward, angle);
-//        crossroadTransform2.RotateAround(end, Vector3.forward, angle);
+
     }
 }
 

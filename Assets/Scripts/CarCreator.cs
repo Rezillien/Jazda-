@@ -41,7 +41,8 @@ public class CarCreator : MonoBehaviour {
             var car = obj.GetComponent<TrueAutoPilot>();
 //            car.creation_time = System.DateTime.Now;
 //            car.creator_name = name;
-            car.DirectionList = new List<Vector2>(list);
+            if(car!=null)
+                car.DirectionList = new List<Vector2>(list);
 
 
             Transform transform = obj.GetComponent<Transform>();

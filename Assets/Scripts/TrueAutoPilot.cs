@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class TrueAutoPilot : MonoBehaviour
 {
-    public float Speed = 3f;
+    public float Speed = 4f;
     public List<Vector2> DirectionList;
     public bool IsReckless;
 
