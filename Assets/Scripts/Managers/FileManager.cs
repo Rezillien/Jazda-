@@ -189,6 +189,11 @@ public class FileManager : MonoBehaviour
                 carCreator.y = creator.y;
                 carCreator.interval = creator.interval;
                 carCreator.car = this.car;
+                carCreator.creatorName = creator.name;
+
+                carCreator.angleStart = creator.angleStart;
+                carCreator.angleEnd = creator.angleEnd;
+
 
                 Transform transform = obj.GetComponent<Transform>();
 
@@ -343,11 +348,11 @@ public class FileManager : MonoBehaviour
                 middle.x += Convert.ToSingle(Math.Cos(Convert.ToDouble(angle + 90) * Math.PI / 180f)) * offset; //TODO
                 middle.y += Convert.ToSingle(Math.Sin(Convert.ToDouble(angle + 90) * Math.PI / 180f)) * offset;
 
-                float length = Vector3.Distance(start, end) - 8f;
+                float length = Vector3.Distance(start, end) - 7f;
                 print(length);
 
                 transform.SetPositionAndRotation(middle, new Quaternion(0, 0, 0, 0));
-                print(angle);
+
                 transform.RotateAround(middle, Vector3.forward, angle);
                 transform.localScale += new Vector3(length, 0, 0);
             }
@@ -378,7 +383,7 @@ public class FileManager : MonoBehaviour
                 float offset = lanes.IndexOf(lane) - lanes.Count / 2 + 0.5f;
                 middle.x += Convert.ToSingle(Math.Cos(Convert.ToDouble(angle + 90) * Math.PI / 180f)) * offset;
                 middle.y += (Convert.ToSingle(Math.Sin(Convert.ToDouble(angle + 90) * Math.PI / 180f))) * offset;
-                float length = Vector3.Distance(start, end) - 10f;
+                float length = Vector3.Distance(start, end) - 7f;
                 print(length);
 
                 transform.SetPositionAndRotation(middle, new Quaternion(0, 0, 0, 0));

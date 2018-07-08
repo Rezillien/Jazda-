@@ -7,6 +7,7 @@ public class ProjectManager : MonoBehaviour
 {
 
     private static ProjectManager _instance = null;
+    public static LogManager LogManager = new LogManager();
 
     private ProjectManager()
     {

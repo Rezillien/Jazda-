@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4505594771088338}
   - component: {fileID: 212372422063806702}
   - component: {fileID: 61416608423059690}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GreenPath
   m_TagString: greenpath
   m_Icon: {fileID: 0}

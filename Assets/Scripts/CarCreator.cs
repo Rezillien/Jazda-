@@ -20,6 +20,9 @@ public class CarCreator : MonoBehaviour {
     public float angle;
     public GameObject car;
     public float interval;
+    public string creatorName;
+    public int angleStart;
+    public int angleEnd;
 
 	// Update is called once per frame
 	void Update () {
@@ -40,7 +43,9 @@ public class CarCreator : MonoBehaviour {
             GameObject obj = Instantiate(prefab) as GameObject;
             var car = obj.GetComponent<TrueAutoPilot>();
 //            car.creation_time = System.DateTime.Now;
-//            car.creator_name = name;
+            car.creator_name = creatorName;
+            car.startLookAngle = angleStart;
+            car.endLookAngle = angleEnd;
             if(car!=null)
                 car.DirectionList = new List<Vector2>(list);
 

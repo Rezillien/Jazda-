@@ -64,6 +64,9 @@ namespace Assets.Scripts.FileObjects
         public float angle { get; set; }
         public float interval { get; set; }
         public List<Point> points { get; set; }
+        public string name { get; set; }
+        public int angleStart { get; set; }
+        public int angleEnd { get; set; }
     }
 
     public class CarDestroyer
