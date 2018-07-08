@@ -2,17 +2,14 @@
 import re
 import numpy as np
 
-# PARAMETER = 'speedlimit'
-# MIN = 3
-# MAX = 17
 
-PARAMETER = 'carefullness'
-MIN = 0.1
-MAX = 1.5
+PARAMETER = 'Speed'
+MIN = 1
+MAX = 10
 
 values = np.linspace(MIN, MAX, 15)
 
-with open('Autopilot.cs', 'r') as f:
+with open('TrueAutoPilot.cs', 'r') as f:
     autopilot = f.read()
 
 for value in values:
