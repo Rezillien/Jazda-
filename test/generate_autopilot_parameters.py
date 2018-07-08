@@ -1,25 +1,22 @@
 
-import json
-
+import re
 import numpy as np
 
-# PARAMETER = 'interval'
-# MIN = 1
-# MAX = 15
 
-PARAMETER = 'angleEnd'
-MIN = 10
-MAX = 94
+PARAMETER = 'Speed'
+MIN = 1
+MAX = 10
 
 values = np.linspace(MIN, MAX, 15)
 
-with open('template.json', 'r') as f:
-    data = json.load(f)
+with open('TrueAutoPilot.cs', 'r') as f:
+    autopilot = f.read()
 
 for value in values:
-    for car_creator in data['carCreators']:
-        car_creator[PARAMETER] = value
+    changed_autopilot = re.sub(r'{} =[^f]*'.format(PARAMETER),
+                               '{} = {}'.format(PARAMETER, value),
+                               autopilot)
 
-    filename = '{}_tests/{}.json'.format(PARAMETER, value)
+    filename = '{}_tests/{}.cs'.format(PARAMETER, value)
     with open(filename, 'w') as outfile:
-        json.dump(data, outfile)
+        outfile.write(changed_autopilot)
