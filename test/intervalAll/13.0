@@ -1,0 +1,26 @@
+log type;creator name;statistics
+crash;V;1
+time;V;7.7712421
+crash;C;1
+time;C;8.0211007
+crash;X;1
+time;X;10.7711815
+crash;Z;1
+time;Z;10.8031626
+crash;V;1
+time;V;7.9410581
+crash;C;1
+time;C;8.2059286
+crash;X;1
+time;X;10.9560916
+crash;Z;1
+time;Z;10.9900582
+crash;V;1
+time;V;7.9411935
+crash;C;1
+time;C;8.217891
+crash;X;1
+time;X;10.947981
+crash;Z;1
+time;Z;10.982006
+

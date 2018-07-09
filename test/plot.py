@@ -1,24 +1,17 @@
 
 import csv
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-
-# PARAMETER = 'interval'
-# MIN = 1
-# MAX = 15
-
-PARAMETER = 'angleEnd'
-MIN = 10
-MAX = 94
-
-# values = np.linspace(MIN, MAX, 15)
+plt.style.use('dark_background')
 
 
 def get_time_statistics(filename):
     with open(filename, 'r') as outfile:
         data = csv.reader(outfile, delimiter=';')
-        time_data = [row[1:] for row in data if row[0] == 'time']
+        time_data = [row[1:] for row in data
+                     if row and row[0] == 'time']
         time_data = np.array(time_data)
 
     car_creators_duplicated = time_data[:, 0]
@@ -40,8 +33,29 @@ def get_time_statistics(filename):
     return statistics
 
 
-print(get_time_statistics('../Assets/Statistics/log'))
+path = 'intervalPartial'
+# path = 'intervalAll'
+# path = 'lookangle'
+datafiles = [float(filename) for filename in os.listdir(path)]
+datafiles.sort()
+parameter_values = []
+time_values = {}
+car_creators = get_time_statistics(path + '/' + str(datafiles[0])).keys()
+for car_creator in car_creators:
+    time_values[car_creator] = []
 
+for filename in datafiles:
+    parameter_values.append(filename)
+    stat = get_time_statistics(path + '/' + str(filename))
+    for car_creator in time_values.keys():
+        time_values[car_creator].append(stat[car_creator])
 
-# plt.plot(values, values**2)
-# plt.show()
+plot_sum = []
+for single_plot in time_values.values():
+    try:
+        plot_sum += np.array(single_plot)
+    except:
+        plot_sum = np.array(single_plot)
+    plt.plot(parameter_values, single_plot)
+plt.plot(parameter_values, plot_sum / len(time_values), linewidth=6)
+plt.show()
