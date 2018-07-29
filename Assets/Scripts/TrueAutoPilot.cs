@@ -174,12 +174,14 @@ public class TrueAutoPilot : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        this.crashCount++;
+		if (coll.gameObject.tag == "car") {
+			this.crashCount++;
+		}
     }
 
     void OnDestroy() {
 //        if(crashCount!=null && creator_name != null)
-        ProjectManager.LogManager.logCrash(this.creator_name, this.crashCount);
-        ProjectManager.LogManager.logTime(this.creator_name,this.creation_time);
+		ProjectManager.LogManager.logCrash(this.creator_name, this.crashCount);
+		ProjectManager.LogManager.logTime(this.creator_name,this.creation_time);
     }
 }
